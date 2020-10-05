@@ -66,7 +66,7 @@ public class TollFeeCalculator {
         return Math.min(totalFee + maxFeesunder60min, 60);
     }
 
-    //ToDo Bug #1.
+    //ToDo Bug #1. (Bug #9 remove minutes in if / else if?)
     public int getTollFeePerPassing(LocalDateTime date) {
         if (isTollFreeDate(date)) return 0;
         int hour = date.getHour();
