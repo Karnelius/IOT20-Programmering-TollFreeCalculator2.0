@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
@@ -20,13 +21,15 @@ public class TollFeeCalculator {
             LocalDateTime[] dates = new LocalDateTime[dateStrings.length];
             testDateStrings = dateStrings;
             testDates = dates;
-            for(int i = 0; i < dates.length; i++) {
+            for (int i = 0; i < dates.length; i++) {
                 dates[i] = LocalDateTime.parse(dateStrings[i], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             }
             System.out.println("The total fee for the inputfile is " + getTotalFeeCost(dates));
             //ToDo Bug #5. (Exceptions -- för i testet.....)
+        }catch (DateTimeParseException e){
+            System.err.println("Could not parse the dates:  " + e + " Please try again!");
         } catch(IOException e) {
-            System.err.println("Could not read file " + inputFile);
+            System.err.println("Could not read the file "   + inputFile);
         }
     }
     //ToDo Bug #2 & #3.

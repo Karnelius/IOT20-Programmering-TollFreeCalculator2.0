@@ -107,11 +107,10 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
         dateTest2[2] = LocalDateTime.parse("2020-12-01 10:29", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
         dateTest2[3] = LocalDateTime.parse("2020-12-01 11:28" , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));   //Fee 8
 
-
         Assertions.assertEquals(16, tester.getTotalFeeCost(dateTest2));
     }
 
-       // @Test
+       //@Test
         // @DisplayName("Testa exceptions")
         //void throwException(){
         //Calculator calc = Calculator();
