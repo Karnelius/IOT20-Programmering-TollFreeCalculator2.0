@@ -6,12 +6,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.Scanner;
 
 public class TollFeeCalculator {
 
     public String[] testDateStrings;
     public LocalDateTime[] testDates;
+
+
 
     public TollFeeCalculator(String inputFile) {
         try {
@@ -24,15 +27,22 @@ public class TollFeeCalculator {
             for (int i = 0; i < dates.length; i++) {
                 dates[i] = LocalDateTime.parse(dateStrings[i], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             }
+            //ToDO Bug #7.
+            sc.close();
             System.out.println("The total fee for the inputfile is " + getTotalFeeCost(dates));
             //ToDo Bug #6.
-        }catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             System.err.println("Could not parse the dates:  " + e + " Please try again!");
-        } catch(IOException e) {
-            System.err.println("Could not read the file "   + inputFile);
+        } catch (IOException e) {
+            System.err.println("Could not read the file " + inputFile);
+        }
+        //ToDo #8. (Till vilken funktion? Inget förändrat i programmet...?)
+        finally{
+            System.out.println("This wonderful TollFeeCalculator is finally closed");
         }
     }
-    //ToDo Bug #2 & #3.
+
+    //ToDo Bug #3.
     public int getTotalFeeCost(LocalDateTime[] dates) {
         int totalFee = 0;
         LocalDateTime intervalStart = dates[0];
@@ -50,9 +60,9 @@ public class TollFeeCalculator {
                 maxFeesunder60min = Math.max(getTollFeePerPassing(date), maxFeesunder60min);
                 totalFee += fee;
             }
-
             System.out.println(date.toString() +"\n" + "Fee: " + getTollFeePerPassing(date)+ "\n" + "---------" );
         }
+        //Todo Bug #2.
         return Math.min(totalFee + maxFeesunder60min, 60);
     }
 
@@ -80,5 +90,7 @@ public class TollFeeCalculator {
     public static void main(String[] args) {
         new TollFeeCalculator("testData/Lab4.txt");
     }
+
+
 
 }

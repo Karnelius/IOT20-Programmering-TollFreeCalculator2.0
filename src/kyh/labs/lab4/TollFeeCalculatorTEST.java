@@ -110,7 +110,7 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
         Assertions.assertEquals(16, tester.getTotalFeeCost(dateTest2));
     }
 
-       //@Test
+        //@Test
         // @DisplayName("Testa exceptions")
         //void throwException(){
         //Calculator calc = Calculator();
