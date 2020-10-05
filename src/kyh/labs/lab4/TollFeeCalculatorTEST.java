@@ -18,18 +18,15 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
 
     @Test
     @DisplayName("Testing that isTollFreeDate works")
-    void yesOrNo() {
+    void Test() {
         LocalDateTime date = LocalDateTime.parse("2020-07-25 07:20", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         assertTrue(tester.isTollFreeDate(date));
-
-
-        // in med datum av olika slag , ut med resultat . Datum av den typen av bugg.
     }
 
 
     @Test
-    @DisplayName("Testing that TollFeePerPassing works")
-    void yesOrNo1(){
+    @DisplayName("Testing that TollFeePerPassing works") // 14:20 rött - Bugg.
+    void Bug1(){
         LocalDateTime dateFee8_0600_0629 = LocalDateTime.parse("2020-04-10 06:15", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         Assertions.assertEquals(8,tester.getTollFeePerPassing(dateFee8_0600_0629));
 
@@ -41,8 +38,6 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
 
         LocalDateTime dateFee13_0800_0829 = LocalDateTime.parse("2020-04-10 08:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         Assertions.assertEquals(13,tester.getTollFeePerPassing(dateFee13_0800_0829));
-
-        // 14:20 rött - Bugg.
 
         LocalDateTime dateFee8_0830_1459 = LocalDateTime.parse("2020-04-10 14:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         Assertions.assertEquals(8,tester.getTollFeePerPassing(dateFee8_0830_1459));
@@ -64,48 +59,45 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
     }
 
 
-    /*@DisplayName("Testing that max 1 fee per passing works")
     @Test
-    void yesOrNo3() {
-        LocalDateTime date1 = LocalDateTime.parse("07:20", DateTimeFormatter.ofPattern("HH:mm"));
-        LocalDateTime date2 = LocalDateTime.parse("08:29", DateTimeFormatter.ofPattern("HH:mm"));
-        assertEquals(tester.getTotalFeeCost(date1));
-
-    }*/
-
-    @DisplayName("Test if amount is max 60 + tests if 1 fee under 60 min.")
-    @Test
-    void yesOrNo2(){
+    @DisplayName("Test if total amount is max 60")
+    void Bug2(){
         LocalDateTime[] dateTest1 = new LocalDateTime[10];
-        dateTest1[0] = LocalDateTime.parse("2020-06-01 15:01", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-        dateTest1[1] = LocalDateTime.parse("2020-06-01 15:02", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-        dateTest1[2] = LocalDateTime.parse("2020-06-01 15:03", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-        dateTest1[3] = LocalDateTime.parse("2020-06-01 15:04", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-        dateTest1[4] = LocalDateTime.parse("2020-06-01 15:05", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-        dateTest1[5] = LocalDateTime.parse("2020-06-01 15:06", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-        dateTest1[6] = LocalDateTime.parse("2020-06-01 15:07", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-        dateTest1[7] = LocalDateTime.parse("2020-06-01 15:08", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-        dateTest1[8] = LocalDateTime.parse("2020-06-01 15:09", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-        dateTest1[9] = LocalDateTime.parse("2020-06-01 15:10", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-                                                                                                                        //Total 8x10 = 80 but expected 60 (max).
+        dateTest1[0] = LocalDateTime.parse("2020-06-01 08:01", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 13
+        dateTest1[1] = LocalDateTime.parse("2020-06-01 09:02", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
+        dateTest1[2] = LocalDateTime.parse("2020-06-01 10:03", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
+        dateTest1[3] = LocalDateTime.parse("2020-06-01 11:04", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
+        dateTest1[4] = LocalDateTime.parse("2020-06-01 12:05", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
+        dateTest1[5] = LocalDateTime.parse("2020-06-01 13:06", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
+        dateTest1[6] = LocalDateTime.parse("2020-06-01 14:07", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
+        dateTest1[7] = LocalDateTime.parse("2020-06-01 15:08", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 13
+        dateTest1[8] = LocalDateTime.parse("2020-06-01 16:09", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 18
+        dateTest1[9] = LocalDateTime.parse("2020-06-01 17:10", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 13
+                                                                                                                        // Total 105 but expected 60.
         Assertions.assertEquals(60, tester.getTotalFeeCost(dateTest1));
         }
 
-       @DisplayName("Test if length is same as lenght in input file: Lab4.txt")
-       @Test
-       void yesOrNo3(){
+    @Test
+    @DisplayName("Tests if only 1 fee (max fee) get added within 60 min")
+    void Bug3(){
+        LocalDateTime[] dateTest1 = new LocalDateTime[5];
+        dateTest1[0] = LocalDateTime.parse("2020-10-05 07:51", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 18
+        dateTest1[1] = LocalDateTime.parse("2020-10-05 08:02", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 13
+        dateTest1[2] = LocalDateTime.parse("2020-10-05 08:03", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 13
+        dateTest1[3] = LocalDateTime.parse("2020-10-05 08:04", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 13
+        dateTest1[4] = LocalDateTime.parse("2020-10-05 08:05", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 13
+
+        Assertions.assertEquals(18, tester.getTotalFeeCost(dateTest1));
+    }
+
+    @Test
+    @DisplayName("Test if length is same as length in input file: Lab4.txt")
+    void Bug4(){
         TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt");
         assertEquals(tester.testDates.length, tester.testDateStrings.length);
        }
 
 
-       /* @DisplayName("Test if only one fee under 60 min")
-        @Test
-        LocalDateTime[] dateFee = new LocalDateTime[0];
-        dateFee[0] = LocalDateTime.parse("2020-06-01 06:01", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-        dateFee[1] = LocalDateTime.parse("2020-06-01 06:01", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-        dateFee[2] = LocalDateTime.parse("2020-06-01 06:01", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
-        Assertions.assertEquals(60, tester.getTotalFeeCost(dateTest1));*/
 
        // @Test
         // @DisplayName("Testa exceptions")

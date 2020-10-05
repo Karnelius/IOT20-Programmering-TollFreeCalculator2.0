@@ -16,7 +16,7 @@ public class TollFeeCalculator {
         try {
             Scanner sc = new Scanner(new File(inputFile));
             String[] dateStrings = sc.nextLine().split(", ");
-            //ToDo ändra lenght-1 till lenght.
+            //ToDo Bug #4.
             LocalDateTime[] dates = new LocalDateTime[dateStrings.length];
             testDateStrings = dateStrings;
             testDates = dates;
@@ -24,11 +24,12 @@ public class TollFeeCalculator {
                 dates[i] = LocalDateTime.parse(dateStrings[i], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             }
             System.out.println("The total fee for the inputfile is " + getTotalFeeCost(dates));
+            //ToDo Bug #5. (Exceptions -- för i testet.....)
         } catch(IOException e) {
             System.err.println("Could not read file " + inputFile);
         }
     }
-    //ToDo ändra så att Math.min visar max 60. + ändra så max 1 taxa per passage.
+    //ToDo Bug #2 & #3.
     public int getTotalFeeCost(LocalDateTime[] dates) {
         int totalFee = 0;
         LocalDateTime intervalStart = dates[0];
@@ -50,7 +51,7 @@ public class TollFeeCalculator {
         return Math.min(totalFee + maxFeesunder60min, 60);
     }
 
-    //ToDo ändra tiden så datum blir rätt.Bug vid 14:20 exempelvis.
+    //ToDo Bug #1.
     public int getTollFeePerPassing(LocalDateTime date) {
         if (isTollFreeDate(date)) return 0;
         int hour = date.getHour();
