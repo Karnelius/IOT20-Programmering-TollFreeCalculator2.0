@@ -9,20 +9,25 @@ import java.util.Scanner;
 
 public class TollFeeCalculator {
 
+    public String[] testDateStrings;
+    public LocalDateTime[] testDates;
+
     public TollFeeCalculator(String inputFile) {
         try {
             Scanner sc = new Scanner(new File(inputFile));
             String[] dateStrings = sc.nextLine().split(", ");
             LocalDateTime[] dates = new LocalDateTime[dateStrings.length-1];
+            testDateStrings = dateStrings;
+            testDates = dates;
             for(int i = 0; i < dates.length; i++) {
                 dates[i] = LocalDateTime.parse(dateStrings[i], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             }
-            System.out.println("The total fee for the inputfile is" + getTotalFeeCost(dates));
+            System.out.println("The total fee for the inputfile is " + getTotalFeeCost(dates));
         } catch(IOException e) {
             System.err.println("Could not read file " + inputFile);
         }
     }
-    //ToDo ändra så att Math.min visar max 60.
+    //ToDo ändra så att Math.min visar max 60. + ändra så max 1 taxa per passage.
     public int getTotalFeeCost(LocalDateTime[] dates) {
         int totalFee = 0;
         LocalDateTime intervalStart = dates[0];
@@ -63,4 +68,5 @@ public class TollFeeCalculator {
     public static void main(String[] args) {
         new TollFeeCalculator("testData/Lab4.txt");
     }
+
 }

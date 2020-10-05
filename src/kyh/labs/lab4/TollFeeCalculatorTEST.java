@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TollFeeCalculatorTEST {
@@ -91,17 +91,25 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
         Assertions.assertEquals(60, tester.getTotalFeeCost(dateTest1));
         }
 
-       //@DisplayName("Test if length is same as lenght in input file: Lab4.txt")
-       //@Test
-        // Jämföra dateString.lenght med dates.lenght
-        // ny instans av tollfeecalculcaotr
-
+       @DisplayName("Test if length is same as lenght in input file: Lab4.txt")
+       @Test
+        void yesOrNo5(){
+        TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt");
+        assertEquals(tester.testDates.length, tester.testDateStrings.length);
+       }
+       
 
         //@DisplayName("Test if only 1 fee under 60 min")
         //@Test
         //assertEquals(10, tester.getTotalFeeCost(dateTest1));
 
 
+       // @Test
+        // @DisplayName("Testa exceptions")
+        //void throwException(){
+        //Calculator calc = Calculator();
+        //assertThrows(IllegalArgumentException.class, () -> calc.throwException());
+        //}
     }
 
 
