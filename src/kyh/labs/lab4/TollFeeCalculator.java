@@ -25,7 +25,7 @@ public class TollFeeCalculator {
                 dates[i] = LocalDateTime.parse(dateStrings[i], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             }
             System.out.println("The total fee for the inputfile is " + getTotalFeeCost(dates));
-            //ToDo Bug #5. (Exceptions -- för i testet.....)
+            //ToDo Bug #6.
         }catch (DateTimeParseException e){
             System.err.println("Could not parse the dates:  " + e + " Please try again!");
         } catch(IOException e) {
@@ -40,6 +40,7 @@ public class TollFeeCalculator {
         for(LocalDateTime date: dates) {
             long diffInMinutes = intervalStart.until(date, ChronoUnit.MINUTES);
             int fee = 0;
+            //Todo Bug #5.
             if(diffInMinutes >= 60) {
                 fee = getTollFeePerPassing(date) + maxFeesunder60min;
                 maxFeesunder60min = 0;
