@@ -22,7 +22,7 @@ public class TollFeeCalculator {
             System.err.println("Could not read file " + inputFile);
         }
     }
-
+    //ToDo ändra så att Math.min visar max 60.
     public int getTotalFeeCost(LocalDateTime[] dates) {
         int totalFee = 0;
         LocalDateTime intervalStart = dates[0];
@@ -39,6 +39,7 @@ public class TollFeeCalculator {
         return Math.max(totalFee, 60);
     }
 
+    //ToDo ändra tiden så datum blir rätt.Bug vid 14:20 exempelvis.
     public int getTollFeePerPassing(LocalDateTime date) {
         if (isTollFreeDate(date)) return 0;
         int hour = date.getHour();
