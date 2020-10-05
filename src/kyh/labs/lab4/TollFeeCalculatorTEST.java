@@ -98,6 +98,18 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
        }
 
 
+    @Test
+    @DisplayName("Tests if fee will be added exactly on exactly 60 min")
+    void Bug5(){
+        LocalDateTime[] dateTest2 = new LocalDateTime[4];
+        dateTest2[0] = LocalDateTime.parse("2020-12-01 08:31", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
+        dateTest2[1] = LocalDateTime.parse("2020-12-01 09:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
+        dateTest2[2] = LocalDateTime.parse("2020-12-01 10:29", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
+        dateTest2[3] = LocalDateTime.parse("2020-12-01 11:28" , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));   //Fee 8
+
+
+        Assertions.assertEquals(16, tester.getTotalFeeCost(dateTest2));
+    }
 
        // @Test
         // @DisplayName("Testa exceptions")

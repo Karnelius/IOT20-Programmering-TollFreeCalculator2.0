@@ -44,8 +44,9 @@ public class TollFeeCalculator {
                 totalFee += getTollFeePerPassing(date);
             } else {
                 maxFeesunder60min = Math.max(getTollFeePerPassing(date), maxFeesunder60min);
+                totalFee += fee;
             }
-            totalFee += fee;
+
             System.out.println(date.toString() +"\n" + "Fee: " + getTollFeePerPassing(date)+ "\n" + "---------" );
         }
         return Math.min(totalFee + maxFeesunder60min, 60);
