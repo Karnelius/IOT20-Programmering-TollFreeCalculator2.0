@@ -27,6 +27,7 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
 
     @Test
     @DisplayName("Bug #1 - Testing that TollFeePerPassing works") // 14:20 rött - Bugg.
+        //Testar så att rätt taxa tas från rätt tidsintervall. Exempelvis 14:20 var fel tidigare.
     void Bug1(){
         LocalDateTime dateFee8_0600_0629 = LocalDateTime.parse("2020-04-10 06:15", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         Assertions.assertEquals(8,tester.getTollFeePerPassing(dateFee8_0600_0629));
@@ -62,6 +63,7 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
 
     @Test
     @DisplayName("Bug #2 - Test if total amount is max 60")
+    //Testar så att max taxan per dag är 60.
     void Bug2(){
         LocalDateTime[] dateTest1 = new LocalDateTime[10];
         dateTest1[0] = LocalDateTime.parse("2020-06-01 08:01", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 13
@@ -80,6 +82,7 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
 
     @Test
     @DisplayName("Bug #3 - Tests if only 1 fee (max fee) get added within 60 min")
+    // Testar så att det endast dras 1 taxa per 60 min.
     void Bug3(){
         LocalDateTime[] dateTest1 = new LocalDateTime[5];
         dateTest1[0] = LocalDateTime.parse("2020-10-05 07:51", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 18
@@ -93,6 +96,7 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
 
     @Test
     @DisplayName("Bug #4 - Test if length is same as length in input file: Lab4.txt")
+    //Testar så att längden på textfilen(inputen) är samma som outputen.
     void Bug4(){
         TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt");
         assertEquals(tester.testDates.length, tester.testDateStrings.length);
@@ -101,6 +105,7 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
 
     @Test
     @DisplayName("Bug #5 - Tests if fee will be added exactly on exactly 60 min")
+    //Testar så att en taxa läggs på exakt på 60min.
     void Bug5(){
         LocalDateTime[] dateTest2 = new LocalDateTime[4];
         dateTest2[0] = LocalDateTime.parse("2020-12-01 08:31", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
@@ -113,6 +118,7 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
 
     @Test
     @DisplayName("Bug #6 - Tests if it's in the same day")
+    //Testar så att det inte finns fler inputs med olika dagar. Då en fil = en 24h dag.
     void Bug6() {
         TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt");
 
@@ -127,6 +133,7 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
 
     @Test
     @DisplayName("Bug #7 - Testing if exception is thrown.")
+    //Testar isolerat så att en exception är thrown.
     void Bug7(){
         LocalDateTime[] dateTest2 = new LocalDateTime[4];
         dateTest2[3] = LocalDateTime.parse("2020-12-01 11:28" , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));

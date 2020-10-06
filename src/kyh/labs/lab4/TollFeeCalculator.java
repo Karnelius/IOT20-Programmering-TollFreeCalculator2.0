@@ -43,7 +43,7 @@ public class TollFeeCalculator {
         } catch (IOException e) {
             System.err.println("Could not read the file " + inputFile);
         }
-        //ToDo #7.
+        //ToDo Bug #7.
         catch (Exception e) {
             System.err.println("Wrong date");
         } finally{
