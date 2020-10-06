@@ -3,8 +3,10 @@ package kyh.labs.lab4;
 import org.junit.jupiter.api.*;
 
 
+import javax.swing.text.DateFormatter;
 import java.io.File;
 import java.io.OptionalDataException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -14,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TollFeeCalculatorTEST {
 public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt");
+public final TollFeeCalculator tester2 = new TollFeeCalculator("testData/Lab4.txt");
+    private Object DateFormatter;
 
 
     @Test
@@ -108,6 +112,20 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
         dateTest2[3] = LocalDateTime.parse("2020-12-01 11:28" , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));   //Fee 8
 
         Assertions.assertEquals(16, tester.getTotalFeeCost(dateTest2));
+    }
+
+    @Test
+    @DisplayName("Testing if list detects different input days")
+    void Bug6(){
+        LocalDateTime[] dateTest2 = new LocalDateTime[3];
+        dateTest2[0] = LocalDateTime.parse("2020-12-12 08:31", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        dateTest2[1] = LocalDateTime.parse("2020-12-01 09:45", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        dateTest2[2] = LocalDateTime.parse("2020-12-31 11:31", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+
+        int dayOne = dateTest2[0].getDayOfMonth();
+        for(int i=0; i < dateTest2.length; i++) {
+            Assertions.assertEquals(dayOne, dateTest2[i].getDayOfYear());
+        }
     }
 
         //@Test
