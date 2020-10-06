@@ -110,13 +110,33 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
         Assertions.assertEquals(16, tester.getTotalFeeCost(dateTest2));
     }
 
+    @Test
+    @DisplayName("Tests if it's in the same day")
+    void Bug6() {
+        LocalDateTime[] dateTest2 = new LocalDateTime[4];
+
+        dateTest2[0] = LocalDateTime.parse("2020-12-01 08:31", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
+        dateTest2[1] = LocalDateTime.parse("2020-12-01 09:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
+        dateTest2[2] = LocalDateTime.parse("2020-12-01 10:29", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));    //Fee 8
+        dateTest2[3] = LocalDateTime.parse("2020-12-01 11:28" , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));   //Fee 8
+
+        int dayOne = dateTest2[0].getDayOfYear();
+        for(int i = 0; i < dateTest2.length; i++) {
+
+            Assertions.assertEquals(dayOne, dateTest2[i].getDayOfYear());
+
+
+        }
+    }
+
         //@Test
         // @DisplayName("Testa exceptions")
         //void throwException(){
         //Calculator calc = Calculator();
         //assertThrows(IllegalArgumentException.class, () -> calc.throwException());
         //}
-    }
+}
+
 
 
 

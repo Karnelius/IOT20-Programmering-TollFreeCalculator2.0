@@ -1,10 +1,14 @@
 package kyh.labs.lab4;
 
+import javax.swing.text.DateFormatter;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Scanner;
@@ -25,7 +29,14 @@ public class TollFeeCalculator {
             testDateStrings = dateStrings;
             testDates = dates;
             for (int i = 0; i < dates.length; i++) {
+
                 dates[i] = LocalDateTime.parse(dateStrings[i], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+
+                int dayOne = dates[0].getDayOfYear();
+                if (dates[i].getDayOfYear() != dayOne) {
+                    throw new Exception();
+
+                }
             }
             //ToDO Bug #7.
             sc.close();
@@ -37,7 +48,9 @@ public class TollFeeCalculator {
             System.err.println("Could not read the file " + inputFile);
         }
         //ToDo #8. (Till vilken funktion? Inget förändrat i programmet...?)
-        finally{
+        catch (Exception e) {
+            System.err.println("Wrong date");
+        } finally{
             System.out.println("This wonderful TollFeeCalculator is finally closed");
         }
     }
