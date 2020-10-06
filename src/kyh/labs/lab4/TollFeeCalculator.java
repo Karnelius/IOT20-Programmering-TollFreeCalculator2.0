@@ -104,5 +104,6 @@ public class TollFeeCalculator {
     }
 
 
-
+    public void throwException() {
+    }
 }
