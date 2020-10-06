@@ -35,7 +35,7 @@ public class TollFeeCalculator {
                     throw new Exception();
                 }
             }
-            //ToDO Bug #7.
+            //ToDO Bug #8.
             sc.close();
             System.out.println("The total fee for the inputfile is " + getTotalFeeCost(dates));
         } catch (DateTimeParseException e) {
@@ -43,7 +43,7 @@ public class TollFeeCalculator {
         } catch (IOException e) {
             System.err.println("Could not read the file " + inputFile);
         }
-        //ToDo #8.
+        //ToDo #7.
         catch (Exception e) {
             System.err.println("Wrong date");
         } finally{
