@@ -129,7 +129,12 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
         }
     }
 
-        //@Test
+
+        // Bug 7
+        //sc.close
+
+
+        //@Test (Bug 8)
         // @DisplayName("Testa exceptions")
         //void throwException(){
         //Calculator calc = Calculator();
