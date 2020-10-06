@@ -52,7 +52,7 @@ public class TollFeeCalculator {
             int fee = 0;
             //Todo Bug #5.
             if(diffInMinutes >= 60) {
-                fee = getTollFeePerPassing(date) + maxFeesunder60min;
+                //fee = getTollFeePerPassing(date) + maxFeesunder60min;
                 maxFeesunder60min = 0;
                 intervalStart = date;
                 totalFee += getTollFeePerPassing(date);
