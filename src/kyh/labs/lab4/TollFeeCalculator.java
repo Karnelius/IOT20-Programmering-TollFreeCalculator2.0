@@ -28,25 +28,22 @@ public class TollFeeCalculator {
             testDateStrings = dateStrings;
             testDates = dates;
             for (int i = 0; i < dates.length; i++) {
-
                 dates[i] = LocalDateTime.parse(dateStrings[i], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-
+                //ToDo Bug #6.
                 int dayOne = dates[0].getDayOfYear();
                 if (dates[i].getDayOfYear() != dayOne) {
                     throw new Exception();
-
                 }
             }
             //ToDO Bug #7.
             sc.close();
             System.out.println("The total fee for the inputfile is " + getTotalFeeCost(dates));
-            //ToDo Bug #6.
         } catch (DateTimeParseException e) {
             System.err.println("Could not parse the dates:  " + e + " Please try again!");
         } catch (IOException e) {
             System.err.println("Could not read the file " + inputFile);
         }
-        //ToDo #8. (Till vilken funktion? Inget förändrat i programmet...?)
+        //ToDo #8.
         catch (Exception e) {
             System.err.println("Wrong date");
         } finally{
