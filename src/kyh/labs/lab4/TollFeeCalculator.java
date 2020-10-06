@@ -45,8 +45,6 @@ public class TollFeeCalculator {
             System.err.println("Could not parse the dates:  " + e + " Please try again!");
         } catch (IOException e) {
             System.err.println("Could not read the file " + inputFile);
-        } catch (Exception e){
-            System.err.println("Wrong day of the month" + e + "Try new date");
         }
         //ToDo #8. (Till vilken funktion? Inget förändrat i programmet...?)
         catch (Exception e) {
