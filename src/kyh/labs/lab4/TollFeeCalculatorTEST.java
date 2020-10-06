@@ -40,7 +40,7 @@ public final TollFeeCalculator tester = new TollFeeCalculator("testData/Lab4.txt
         LocalDateTime dateFee13_0800_0829 = LocalDateTime.parse("2020-04-10 08:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         Assertions.assertEquals(13,tester.getTollFeePerPassing(dateFee13_0800_0829));
 
-        LocalDateTime dateFee8_0830_1459 = LocalDateTime.parse("2020-04-10 14:30", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        LocalDateTime dateFee8_0830_1459 = LocalDateTime.parse("2020-04-10 14:20", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         Assertions.assertEquals(8,tester.getTollFeePerPassing(dateFee8_0830_1459));
 
         LocalDateTime dateFee13_1500_1529 = LocalDateTime.parse("2020-04-10 15:29", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
