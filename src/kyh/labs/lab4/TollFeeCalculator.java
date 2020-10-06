@@ -1,16 +1,11 @@
 package kyh.labs.lab4;
 
-import javax.swing.text.DateFormatter;
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.Scanner;
 
 public class TollFeeCalculator {
@@ -61,7 +56,6 @@ public class TollFeeCalculator {
             int fee = 0;
             //Todo Bug #5.
             if(diffInMinutes >= 60) {
-                //fee = getTollFeePerPassing(date) + maxFeesunder60min;
                 maxFeesunder60min = 0;
                 intervalStart = date;
                 totalFee += getTollFeePerPassing(date);
