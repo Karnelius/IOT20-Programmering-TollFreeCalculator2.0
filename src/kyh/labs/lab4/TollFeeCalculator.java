@@ -47,7 +47,7 @@ public class TollFeeCalculator {
     }
 
     //ToDo Bug #3.
-    public int getTotalFeeCost(LocalDateTime[] dates) {
+    public static int getTotalFeeCost(LocalDateTime[] dates) {
         int totalFee = 0;
         LocalDateTime intervalStart = dates[0];
         int maxFeesunder60min = 0;
@@ -70,7 +70,7 @@ public class TollFeeCalculator {
     }
 
     //ToDo Bug #1. (Bug #9 remove minutes in if / else if?)
-    public int getTollFeePerPassing(LocalDateTime date) {
+    public static int getTollFeePerPassing(LocalDateTime date) {
         if (isTollFreeDate(date)) return 0;
         int hour = date.getHour();
         int minute = date.getMinute();
@@ -86,7 +86,7 @@ public class TollFeeCalculator {
         else return 0;
     }
 
-    public boolean isTollFreeDate(LocalDateTime date) {
+    public static boolean isTollFreeDate(LocalDateTime date) {
         return date.getDayOfWeek().getValue() == 6 || date.getDayOfWeek().getValue() == 7 || date.getMonth().getValue() == 7;
     }
 
@@ -94,7 +94,4 @@ public class TollFeeCalculator {
         new TollFeeCalculator("testData/Lab4.txt");
     }
 
-
-    public void throwException() {
-    }
 }
